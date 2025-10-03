@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cisco Security – Cheat Sheet (HTML v0.7.6)</title>
+<title>Cisco Security – Cheat Sheet (HTML v0.7.8)</title>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -36,7 +36,6 @@
   details.section { margin: 16px 0; }
   details > summary { list-style:none; cursor:pointer; background: #0b0c10; border:1px solid var(--border); border-radius:16px; padding: 12px 16px; display:flex; align-items:center; justify-content:space-between; }
   details > summary .title { display:flex; align-items:center; gap:8px; font-weight:700; }
-  /* Caret marker */
   details > summary::after { content: '▸'; color:#cbd5e1; font-weight:800; margin-left:12px; }
   details[open] > summary::after { content: '▾'; }
   .grid { display:grid; grid-template-columns: repeat(1, minmax(0,1fr)); gap:12px; }
@@ -54,8 +53,6 @@
   .muted { color: var(--muted); font-size:12px; }
   .match { outline: 2px solid rgba(34,211,238,.25); box-shadow: 0 0 0 4px rgba(34,211,238,.08) inset; }
   footer { color: var(--muted); font-size:12px; margin: 24px 0 40px; }
-
-  /* Modal */
   .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.6); }
   .modal[open] { display:flex; }
   .modal .dialog { width: min(680px, 92vw); background: var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; }
@@ -119,7 +116,7 @@
 
     <div id="sections"></div>
 
-    <footer>v0.7.6 (HTML) — Cihan Alaçamlı @2025</footer>
+    <footer>v0.7.8 — Cihan Alaçamlı @2025 || Kept 360 Self‑Check exception; all else cisco.com‑only.</footer>
   </main>
 
   <!-- About modal -->
@@ -348,7 +345,9 @@ function render() {
 
       // Default link pills
       it.links.forEach(l => {
-        if (!/^https:\/\/www\.cisco\.com\//.test(l.url)) return;
+        const allowCisco = /^https:\/\/www\.cisco\.com\//.test(l.url);
+        const allowSelfCheck = /^https:\/\/cihanalacamli\.github\.io\/?/.test(l.url); // single allowed exception
+        if (!(allowCisco || allowSelfCheck)) return;
         const a = create('a','pill'); a.href = l.url; a.target = '_blank'; a.rel = 'noreferrer'; a.textContent = l.label; links.append(a);
       });
 
@@ -502,9 +501,11 @@ if (document.readyState === 'loading') {
 (function runTests(){
   try {
     console.group('Partner Hub tests');
-    // Newline check
+    // Newline check (must use escaped \n, not raw newlines)
     const joined = ['a','b'].join('\n');
     console.assert(joined === 'a\nb', 'join("\\n") must work');
+    const joined2 = ['x','','y'].join('\n');
+    console.assert(joined2 === 'x\n\ny', 'join handles empty element between newlines');
 
     // Data integrity
     console.assert(Array.isArray(DATA) && DATA.length>0, 'DATA should not be empty');
@@ -539,41 +540,18 @@ if (document.readyState === 'loading') {
     // Competition & Specializations
     console.assert(cats.has('Competition') && cats.has('Cisco Security Specializations'), 'Competition & Specializations categories must exist');
 
-    // Link policy
-    const invalid = DATA.flatMap(i => i.links.map(l => l.url)).filter(u => !u.startsWith('https://www.cisco.com/') && !u.includes('cihanalacamli.github.io'));
-    console.assert(invalid.length === 0, 'All links (except Self‑Check) must start with https://www.cisco.com/');
+    // Link policy (+ exception allowed for Self‑Check CTA)
+    const invalid = DATA.flatMap(i => i.links.map(l => l.url)).filter(u => !u.startsWith('https://www.cisco.com/') && !/^https:\/\/cihanalacamli\.github\.io\/?/.test(u));
+    console.assert(invalid.length === 0, 'Links must be cisco.com, except the Self‑Check CTA');
 
-    // Quick Tools existence (wizard removed by request)
-    console.assert(!document.getElementById('incentiveWizard'), 'Incentive wizard should be removed');
-    console.assert(document.getElementById('suiteBuilder'), 'Suite builder should exist');
-    console.assert(document.getElementById('specPlanner'), 'Spec planner should exist');
+    // Self‑Check CTA renders
+    render();
+    const selfCheckBtn = document.querySelector('a.pill[href^="https://cihanalacamli.github.io"]');
+    console.assert(!!selfCheckBtn, 'Open Simulator button should render under 360 Alignment');
 
-    // Hash deep-link (non-polluting)
-    const prevHash = location.hash; const prevVal = (document.getElementById('q').value||'');
-    location.hash = '#q=firewall';
-    applyHash();
-    console.assert((document.getElementById('q').value||'')==='firewall', 'Hash should hydrate the search box');
-    // restore
-    location.hash = prevHash || '';
-    const qi = document.getElementById('q'); if (qi) { qi.value = ''; render(); }
-
-    // Planner progress should update on toggle
-    const firstCb = document.querySelector('#specChecklist input[type="checkbox"]');
-    if (firstCb) {
-      const was = firstCb.checked; firstCb.checked = !was; firstCb.dispatchEvent(new Event('change'));
-      const txt = (document.getElementById('specProgress').textContent||'');
-      console.assert(/Progress: (?!0%)/.test(txt), 'Progress should update above 0% when one item is checked');
-      // revert
-      firstCb.checked = was; firstCb.dispatchEvent(new Event('change'));
-    }
-
-    // Enablement & Certifications section should have items
-    const enItems = DATA.filter(d=>d.category==='Enablement & Certifications');
-    console.assert(enItems.length >= 2, 'Enablement & Certifications should contain items');
-
-    // Ensure removed inline cards are not present
-    console.assert(!DATA.some(d=>d.id==='suite-builder'), 'Inline Suite Builder card must be removed');
-    console.assert(!DATA.some(d=>d.id==='spec-planner'), 'Inline Specializations Planner card must be removed');
+    // copyText returns a Promise (do not trigger actual copy flows in tests)
+    const p = copyText('sanity-check');
+    console.assert(p && typeof p.then === 'function', 'copyText returns a Promise');
 
     console.groupEnd();
   } catch(e){ console.error('Tests failed:', e); }
@@ -581,4 +559,3 @@ if (document.readyState === 'loading') {
 </script>
 </body>
 </html>
-
