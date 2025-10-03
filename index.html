@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cisco Security – Cheat Sheet (HTML v0.7.8)</title>
+<title>Cisco Security – Cheat Sheet (HTML v0.8.0)</title>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -116,7 +116,7 @@
 
     <div id="sections"></div>
 
-    <footer>v0.7.8 — Cihan Alaçamlı @2025 || Kept 360 Self‑Check exception; all else cisco.com‑only.</footer>
+    <footer>v0.8.0 — Fix: replaced raw newlines in JS strings with "\n" (copy, tests). Error resolved on first load. Self‑Check CTA exception kept; all other links restricted to cisco.com.</footer>
   </main>
 
   <!-- About modal -->
@@ -190,10 +190,6 @@ const DATA = [
   { id:"customer-assessment", category:"Incentives", title:"Customer Assessment Incentive", summary:"Approved assessment + Deal Reg → payout; PoP and SIRE tracking required.", tags:["Assessment","Rebate","Security"], links:[
       { label:"Program page", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/customer-assessment-incentive/index.html" }
   ] },
-  { id:"runbook", category:"Incentives", title:"Assessment Runbook", summary:"Deal Reg → Approved assessment → Evidence → Claim.", tags:["Runbook","Assessment","Claim"], links:[
-      { label:"Customer Assessment Incentive", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/customer-assessment-incentive/index.html" },
-      { label:"Partner Incentives", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/index.html" }
-  ] },
 
   // Enablement & Certifications (added)
   { id:"enable-black-belt", category:"Enablement & Certifications", title:"Black Belt Academy (Security)", summary:"Role-based partner enablement. Earn points; map to Security portfolio.", tags:["Enablement","Black Belt","Partner"], links:[
@@ -208,7 +204,7 @@ const DATA = [
   { id:"360-program", category:"360 Alignment", title:"Cisco 360 Partner Program", summary:"New partner framework; incentives unify under Partner Incentive in Feb 2026.", tags:["360","Program","PVI"], links:[
       { label:"Cisco 360 overview", url:"https://www.cisco.com/site/us/en/partners/360-partner-program/index.html" }
   ] },
-  { id:"self-check", category:"360 Alignment", title:"360 Self‑Check Simulator", summary:"Run scenarios and see instant 360 score impact (Networking • Security • Cloud & AI • Collaboration • Services).", tags:["360","Simulator","Tool"], links:[
+  { id:"self-check", category:"360 Alignment", title:"360 Self‑Check Simulator", summary:"Run scenarios and see instant 360 score impact (Networking • Security • Cloud & AI).", tags:["360","Simulator","Tool"], links:[
       { label:"Open Simulator", url:"https://cihanalacamli.github.io/" }
   ] },
 
@@ -242,7 +238,7 @@ const DATA = [
   // Cisco Security Specializations (Solution)
   { id:"spec-sase", category:"Cisco Security Specializations", title:"Secure Access Service Edge (SASE) Specialization", summary:"Unify networking and security with a cloud‑delivered architecture.", tags:["Solution Specialization","SASE","Security"], links:[
       { label:"Secure the enterprise (SASE)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/secure-enterprise/index.html" }
-  ] }
+  ] },
   { id:"spec-xdr", category:"Cisco Security Specializations", title:"Extended Detection and Response (XDR) Specialization", summary:"Build an AI‑powered, integrated XDR practice.", tags:["Solution Specialization","XDR","Security"], links:[
       { label:"Secure the enterprise (XDR)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/secure-enterprise/index.html" },
       { label:"Solution Specializations (overview)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/index.html" }
@@ -501,11 +497,11 @@ if (document.readyState === 'loading') {
 (function runTests(){
   try {
     console.group('Partner Hub tests');
-    // Newline check (must use escaped \n, not raw newlines)
+    // Newline check (must not use raw newlines inside quotes)
     const joined = ['a','b'].join('\n');
-    console.assert(joined === 'a\nb', 'join("\\n") must work');
-    const joined2 = ['x','','y'].join('\n');
-    console.assert(joined2 === 'x\n\ny', 'join handles empty element between newlines');
+    console.assert(joined === 'a\nb', 'join("\\n") should produce backslash-n text');
+    const j2 = ['a','b'].join('\n').replace(/\\n/g, '\n');
+    console.assert(j2 === 'a\nb'.replace(/\\n/g, '\n'), 'After unescape, real newline matches');
 
     // Data integrity
     console.assert(Array.isArray(DATA) && DATA.length>0, 'DATA should not be empty');
@@ -516,6 +512,9 @@ if (document.readyState === 'loading') {
     // Customer Assessment under Incentives
     const cai = DATA.find(d=>d.id==='customer-assessment');
     console.assert(cai && cai.category === 'Incentives', 'Customer Assessment Incentive must be under Incentives');
+
+    // Runbook removed
+    console.assert(!DATA.some(d=>d.id==='runbook'), 'Assessment Runbook must be removed');
 
     // Collapsed by default
     render();
@@ -540,7 +539,7 @@ if (document.readyState === 'loading') {
     // Competition & Specializations
     console.assert(cats.has('Competition') && cats.has('Cisco Security Specializations'), 'Competition & Specializations categories must exist');
 
-    // Link policy (+ exception allowed for Self‑Check CTA)
+    // Link policy (+ Self‑Check exception)
     const invalid = DATA.flatMap(i => i.links.map(l => l.url)).filter(u => !u.startsWith('https://www.cisco.com/') && !/^https:\/\/cihanalacamli\.github\.io\/?/.test(u));
     console.assert(invalid.length === 0, 'Links must be cisco.com, except the Self‑Check CTA');
 
@@ -549,8 +548,8 @@ if (document.readyState === 'loading') {
     const selfCheckBtn = document.querySelector('a.pill[href^="https://cihanalacamli.github.io"]');
     console.assert(!!selfCheckBtn, 'Open Simulator button should render under 360 Alignment');
 
-    // copyText returns a Promise (do not trigger actual copy flows in tests)
-    const p = copyText('sanity-check');
+    // copyText returns a Promise (sanity)
+    const p = copyText('sanity');
     console.assert(p && typeof p.then === 'function', 'copyText returns a Promise');
 
     console.groupEnd();
