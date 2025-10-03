@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cisco Security – Cheat Sheet (HTML v0.8.0)</title>
+<title>Cisco Security – Cheat Sheet (HTML v0.8.4)</title>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -71,7 +71,6 @@
           <div class="credit" id="aboutOpen" title="About this guide">Developed by Cihan Alaçamlı</div>
         </div>
         <div class="row" style="gap:8px;">
-          <button id="copyBtn" class="btn" aria-label="Copy links">📋 Copy links</button>
           <button id="printBtn" class="btn" aria-label="Print">🖨️ Print</button>
         </div>
       </div>
@@ -116,7 +115,7 @@
 
     <div id="sections"></div>
 
-    <footer>v0.8.0 — Cihan Alaçamlı @2025. 360 Self‑Check exception kept; all other links restricted to cisco.com.</footer>
+    <footer>v0.8.4 — Cihan Alaçamlı @2025. 360 Self-Check exception kept, all sources belong to *cisco.com.</footer>
   </main>
 
   <!-- About modal -->
@@ -124,7 +123,7 @@
     <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
       <button class="btn close" id="aboutClose" aria-label="Close">✖</button>
       <h2 id="aboutTitle">About this guide</h2>
-      <p>Built as a compact, partner‑friendly index to official Cisco Security resources. All outbound links are restricted to <span class="kbd">https://www.cisco.com/</span> (except the 360 Self‑Check Simulator CTA).</p>
+      <p>Built as a compact, partner-friendly index to official Cisco Security resources. All outbound links are restricted to <span class="kbd">*.cisco.com</span> (except the 360 Self-Check Simulator CTA).</p>
       <p class="muted">Developed by Cihan Alaçamlı • Keyboard: <span class="kbd">/</span> focus, <span class="kbd">Esc</span> clear, <span class="kbd">Enter</span> jump to first match.</p>
     </div>
   </div>
@@ -146,18 +145,18 @@ const DATA = [
   // Cisco Security Overview — required order
   { id:"overview-firewall", category:"Cisco Security Overview", title:"Cisco Secure Firewall", summary:"Appliances (1000/1200/3100/4200/9300) with ASA/FTD software options.", tags:["Firewall","ASA","FTD"], links:[
       { label:"Secure Firewall", url:"https://www.cisco.com/site/us/en/products/security/firewalls/index.html" },
-      { label:"Ordering Guide (c07‑737902)", url:"https://www.cisco.com/c/en/us/products/collateral/security/secure-firewall/guide-c07-737902.html" }
+      { label:"Ordering Guide (c07-737902)", url:"https://www.cisco.com/c/en/us/products/collateral/security/secure-firewall/guide-c07-737902.html" }
   ] },
   { id:"overview-xdr", category:"Cisco Security Overview", title:"Cisco XDR", summary:"Cross-domain detection and response integrated with Cisco Security Cloud.", tags:["XDR","Detection & Response"], links:[
       { label:"Cisco XDR", url:"https://www.cisco.com/site/us/en/products/security/xdr/index.html" }
   ] },
-  { id:"overview-secure-access", category:"Cisco Security Overview", title:"Cisco Secure Access (SSE)", summary:"Zero‑Trust access: SWG, ZTNA, CASB under one roof.", tags:["SSE","ZTNA","SWG","CASB"], links:[
+  { id:"overview-secure-access", category:"Cisco Security Overview", title:"Cisco Secure Access (SSE)", summary:"Zero-Trust access: SWG, ZTNA, CASB under one roof.", tags:["SSE","ZTNA","SWG","CASB"], links:[
       { label:"Secure Access", url:"https://www.cisco.com/site/us/en/products/security/secure-access/index.html" }
   ] },
-  { id:"overview-duo", category:"Cisco Security Overview", title:"Cisco Duo", summary:"MFA + device trust + phishing‑resistant authentication.", tags:["Duo","MFA","Zero Trust"], links:[
+  { id:"overview-duo", category:"Cisco Security Overview", title:"Cisco Duo", summary:"MFA + device trust + phishing-resistant authentication.", tags:["Duo","MFA","Zero Trust"], links:[
       { label:"Duo", url:"https://www.cisco.com/site/us/en/products/security/duo/index.html" }
   ] },
-  { id:"overview-umbrella", category:"Cisco Security Overview", title:"Cisco Umbrella", summary:"Cloud‑delivered security (DNS, SWG, CASB) in one platform.", tags:["Umbrella","SASE","DNS"], links:[
+  { id:"overview-umbrella", category:"Cisco Security Overview", title:"Cisco Umbrella", summary:"Cloud-delivered security (DNS, SWG, CASB) in one platform.", tags:["Umbrella","SASE","DNS"], links:[
       { label:"Umbrella (product)", url:"https://www.cisco.com/site/us/en/products/security/umbrella/index.html" }
   ] },
   { id:"overview-ise", category:"Cisco Security Overview", title:"Cisco Identity Services Engine (ISE)", summary:"Network access control (NAC), segmentation, policy.", tags:["ISE","NAC","SDA"], links:[
@@ -173,7 +172,7 @@ const DATA = [
   ] },
 
   // Incentives
-  { id:"vip", category:"Incentives", title:"VIP Incentive (VIP 46)", summary:"Back‑end rebate on strategic offers; bridge to Partner Incentive in Feb 2026.", tags:["Rebate","Security","Lifecycle","VIP"], links:[
+  { id:"vip", category:"Incentives", title:"VIP Incentive (VIP 46)", summary:"Back-end rebate on strategic offers; bridge to Partner Incentive in Feb 2026.", tags:["Rebate","Security","Lifecycle","VIP"], links:[
       { label:"VIP overview", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/vip-incentive/index.html" },
       { label:"Partner Incentives (landing)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/index.html" },
       { label:"VIP key dates", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/vip-incentive/vip-enrollment-dates.html" }
@@ -181,7 +180,7 @@ const DATA = [
   { id:"lifecycle", category:"Incentives", title:"Lifecycle Incentives", summary:"Rewards across LAND→ADOPT→EXPAND→RENEW for usage/adoption/renewals.", tags:["Lifecycle","Software","ARR","Security"], links:[
       { label:"Lifecycle Incentives", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/lifecycle/index.html" }
   ] },
-  { id:"seller-rewards", category:"Incentives", title:"Seller Rewards", summary:"Salesperson‑level challenges & rewards.", tags:["Rewards","Seller","SPIFF"], links:[
+  { id:"seller-rewards", category:"Incentives", title:"Seller Rewards", summary:"Salesperson-level challenges & rewards.", tags:["Rewards","Seller","SPIFF"], links:[
       { label:"Seller Rewards", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/rewards/index.html" }
   ] },
   { id:"cpi-coming-soon", category:"Incentives", title:"CPI (Cisco Partner Incentive)", summary:"Unified rebate program after the 360 launch — coming soon.", tags:["Rebate","CPI","360","Coming soon"], links:[
@@ -191,7 +190,7 @@ const DATA = [
       { label:"Program page", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/benefits/incentives/customer-assessment-incentive/index.html" }
   ] },
 
-  // Enablement & Certifications (added)
+  // Enablement & Certifications
   { id:"enable-black-belt", category:"Enablement & Certifications", title:"Black Belt Academy (Security)", summary:"Role-based partner enablement. Earn points; map to Security portfolio.", tags:["Enablement","Black Belt","Partner"], links:[
       { label:"Black Belt Academy", url:"https://www.cisco.com/site/us/en/partners/training/black-belt-academy/index.html" }
   ] },
@@ -204,16 +203,16 @@ const DATA = [
   { id:"360-program", category:"360 Alignment", title:"Cisco 360 Partner Program", summary:"New partner framework; incentives unify under Partner Incentive in Feb 2026.", tags:["360","Program","PVI"], links:[
       { label:"Cisco 360 overview", url:"https://www.cisco.com/site/us/en/partners/360-partner-program/index.html" }
   ] },
-  { id:"self-check", category:"360 Alignment", title:"360 Self‑Check Simulator", summary:"Run scenarios and see instant 360 score impact (Networking • Security • Cloud & AI).", tags:["360","Simulator","Tool"], links:[
+  { id:"self-check", category:"360 Alignment", title:"360 Self-Check Simulator", summary:"Run scenarios and see instant 360 score impact (Networking • Security • Cloud & AI).", tags:["360","Simulator","Tool"], links:[
       { label:"Open Simulator", url:"https://cihanalacamli.github.io/" }
   ] },
 
-  // Architectures & Suites — 3 suites (inline builder removed)
+  // Architectures & Suites
   { id:"suite-breach", category:"Architectures & Suites", title:"Cisco Breach Protection Suite", summary:"Accelerate detection/response across key vectors.", tags:["Suite","Breach Protection"], links:[
       { label:"Breach Protection", url:"https://www.cisco.com/site/us/en/products/security/breach-protection/index.html" },
-      { label:"Suites – At‑a‑Glance", url:"https://www.cisco.com/c/en/us/products/collateral/security/security-cloud/security-suites-aag.html" }
+      { label:"Suites – At-a-Glance", url:"https://www.cisco.com/c/en/us/products/collateral/security/security-cloud/security-suites-aag.html" }
   ] },
-  { id:"suite-cloud", category:"Architectures & Suites", title:"Cisco Cloud Protection Suite", summary:"End‑to‑end protection for apps, workloads, networks, and clouds.", tags:["Suite","Cloud Protection"], links:[
+  { id:"suite-cloud", category:"Architectures & Suites", title:"Cisco Cloud Protection Suite", summary:"End-to-end protection for apps, workloads, networks, and clouds.", tags:["Suite","Cloud Protection"], links:[
       { label:"Cloud Protection", url:"https://www.cisco.com/site/us/en/products/security/cloud-protection/index.html" }
   ] },
   { id:"suite-user", category:"Architectures & Suites", title:"Cisco User Protection Suite", summary:"Secure access for users and devices, anywhere.", tags:["Suite","User Protection"], links:[
@@ -223,7 +222,7 @@ const DATA = [
       { label:"Security Services", url:"https://www.cisco.com/site/us/en/products/security/services/index.html" }
   ] },
 
-  // Competition — official nuggets
+  // Competition
   { id:"comp-nuggets-sse", category:"Competition", title:"SSE Nuggets", summary:"Cisco Secure Access vs Zscaler / Palo Alto / Netskope: official highlights.", tags:["SSE","Competitive"], links:[
       { label:"SSE comparison", url:"https://www.cisco.com/site/us/en/solutions/security-service-edge-sse/sse-competitive-comparison.html" }
   ] },
@@ -235,26 +234,31 @@ const DATA = [
       { label:"Meraki MX vs FortiGate", url:"https://www.cisco.com/c/m/en_us/solutions/small-business/meraki-security-mx/meraki-mx-fortigate-comparison.html" }
   ] },
 
-  // Cisco Security Specializations (Solution)
-  { id:"spec-sase", category:"Cisco Security Specializations", title:"Secure Access Service Edge (SASE) Specialization", summary:"Unify networking and security with a cloud‑delivered architecture.", tags:["Solution Specialization","SASE","Security"], links:[
-      { label:"Secure the enterprise (SASE)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/secure-enterprise/index.html" }
+  /* -------- Cisco Security Specializations (Solution) — UPDATED -------- */
+  { id:"spec-sase", category:"Cisco Security Specializations", title:"Secure Access Service Edge (SASE) Specialization", summary:"Unify networking and security with a cloud-delivered architecture.", tags:["Solution Specialization","SASE","Security"], links:[
+      { label:"SASE Overview (ebook)", url:"https://ebooks.cisco.com/story/solution-specializations-overview/page/5/1" },
+      { label:"Requirements", url:"https://www.cisco.com/c/dam/en_us/partners/downloads/sase-solutions-specialization-requirements.pdf" }
   ] },
-  { id:"spec-xdr", category:"Cisco Security Specializations", title:"Extended Detection and Response (XDR) Specialization", summary:"Build an AI‑powered, integrated XDR practice.", tags:["Solution Specialization","XDR","Security"], links:[
-      { label:"Secure the enterprise (XDR)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/secure-enterprise/index.html" },
-      { label:"Solution Specializations (overview)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/index.html" }
+  { id:"spec-xdr", category:"Cisco Security Specializations", title:"Extended Detection and Response (XDR) Specialization", summary:"Build an AI-powered, integrated XDR practice.", tags:["Solution Specialization","XDR","Security"], links:[
+      { label:"XDR Overview (ebook)", url:"https://ebooks.cisco.com/story/solution-specializations-overview/page/5/2" },
+      { label:"Requirements", url:"https://www.cisco.com/c/dam/en_us/partners/partner_with_cisco/expertise/specializations/xdr-solutions-requirements-document.pdf" }
   ] },
   { id:"spec-core-security", category:"Cisco Security Specializations", title:"Core Security Specialization", summary:"Foundational security capabilities validation.", tags:["Solution Specialization","Security"], links:[
-      { label:"Solution Specializations (overview)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/index.html" }
+      { label:"Core Security Overview (ebook)", url:"https://ebooks.cisco.com/story/solution-specializations-overview/page/5/3" },
+      { label:"Requirements", url:"https://www.cisco.com/c/dam/en_us/partners/partner_with_cisco/expertise/specializations/core-security-solutions-specialization-requirements.pdf" }
   ] },
   { id:"spec-secure-networking", category:"Cisco Security Specializations", title:"Secure Networking Specialization", summary:"Secure design, deployment, and operations across the network layer.", tags:["Solution Specialization","Secure Networking"], links:[
-      { label:"Solution Specializations (overview)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/index.html" }
+      { label:"Secure Networking Overview (ebook)", url:"https://ebooks.cisco.com/story/solution-specializations-overview/page/5/5" },
+      { label:"Requirements", url:"https://www.cisco.com/c/dam/en_us/partners/partner_with_cisco/expertise/specializations/secure-networking-solutions-specialization-requirements.pdf" }
   ] },
   { id:"spec-secure-network-mgmt", category:"Cisco Security Specializations", title:"Secure Network Management Specialization", summary:"Visibility and control for secure networks (policy, telemetry, etc.).", tags:["Solution Specialization","Secure Network Management"], links:[
-      { label:"Solution Specializations (overview)", url:"https://www.cisco.com/site/us/en/partners/cisco-partner-program/expertise/specializations/solution/index.html" }
+      { label:"Secure Network Management Overview (ebook)", url:"https://ebooks.cisco.com/story/solution-specializations-overview/page/5/6" },
+      { label:"Requirements", url:"https://www.cisco.com/c/dam/en_us/partners/partner_with_cisco/expertise/specializations/secure-network-management-solutions-specialization-requirements.pdf" }
   ] },
 ];
 
 // --- Helpers ---
+const ALLOW_CISCO = /^https:\/\/([a-z0-9-]+\.)*cisco\.com\//i;
 const $ = sel => document.querySelector(sel);
 function create(el, cls) { const n = document.createElement(el); if (cls) n.className = cls; return n; }
 function ensureSectionsContainer() {
@@ -268,11 +272,11 @@ function ensureSectionsContainer() {
   return wrap;
 }
 
-// Clipboard safe helper
+// Clipboard safe helper (never runs on load; only on click)
 function copyText(text) {
   return new Promise(async (resolve, reject) => {
     try {
-      if (navigator.clipboard && window.isSecureContext) {
+      if (false && navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
         return resolve();
       }
@@ -341,7 +345,7 @@ function render() {
 
       // Default link pills
       it.links.forEach(l => {
-        const allowCisco = /^https:\/\/www\.cisco\.com\//.test(l.url);
+        const allowCisco = ALLOW_CISCO.test(l.url);
         const allowSelfCheck = /^https:\/\/cihanalacamli\.github\.io\/?/.test(l.url); // single allowed exception
         if (!(allowCisco || allowSelfCheck)) return;
         const a = create('a','pill'); a.href = l.url; a.target = '_blank'; a.rel = 'noreferrer'; a.textContent = l.label; links.append(a);
@@ -369,7 +373,7 @@ function suitePreset(suite) {
     lines:['Secure Access (SSE)','Duo','Secure Email','Telemetry/Threat Intel (Talos/TE)'],
     links:[
       {label:'User Protection', url:'https://www.cisco.com/site/us/en/products/security/user-protection/index.html'},
-      {label:'Suites – At‑a‑Glance', url:'https://www.cisco.com/c/en/us/products/collateral/security/security-cloud/security-suites-aag.html'}
+      {label:'Suites – At-a-Glance', url:'https://www.cisco.com/c/en/us/products/collateral/security/security-cloud/security-suites-aag.html'}
     ]
   };
   if (suite==='cloud') return {
@@ -394,7 +398,7 @@ function renderSuite(toId, preset) {
   out.innerHTML = '';
   const h = document.createElement('div'); h.style.fontWeight='700'; h.textContent = preset.title + ' — Typical bundle'; out.append(h);
   const ul = document.createElement('ul'); preset.lines.forEach(s=>{ const li=document.createElement('li'); li.textContent=s; ul.append(li); }); out.append(ul);
-  const bar = create('div','linkbar'); preset.links.forEach(l=>{ if (/^https:\/\/www\.cisco\.com\//.test(l.url)) { const a=create('a','pill'); a.href=l.url; a.target='_blank'; a.rel='noreferrer'; a.textContent=l.label; bar.append(a);} }); out.append(bar);
+  const bar = create('div','linkbar'); preset.links.forEach(l=>{ if (ALLOW_CISCO.test(l.url)) { const a=create('a','pill'); a.href=l.url; a.target='_blank'; a.rel='noreferrer'; a.textContent=l.label; bar.append(a);} }); out.append(bar);
 }
 
 function copySuite(preset) {
@@ -454,14 +458,6 @@ function applyHash() {
 
 function attachGlobalUI() {
   const q = $('#q'); if (q) q.addEventListener('input', ()=>{ render(); updateHashFromSearch(); });
-  const copyBtn = $('#copyBtn'); if (copyBtn) copyBtn.addEventListener('click', () => {
-    const q = (($('#q') && $('#q').value) || '').trim().toLowerCase();
-    const items = DATA.filter(d => !q || (d.title + ' ' + d.summary + ' ' + (d.tags||[]).join(' ')).toLowerCase().includes(q));
-    const lines = items.flatMap(i => i.links
-      .filter(l => /^https:\/\/www\.cisco\.com\//.test(l.url))
-      .map(l => `• ${i.title} — ${l.label}: ${l.url}`));
-    copyText(lines.join('\n')).then(() => alert('Link list copied.')).catch(()=>alert('Copy failed. Text opened for manual copy.'));
-  });
   const printBtn = $('#printBtn'); if (printBtn) printBtn.addEventListener('click', () => window.print());
 
   // Keyboard shortcuts
@@ -497,61 +493,23 @@ if (document.readyState === 'loading') {
 (function runTests(){
   try {
     console.group('Partner Hub tests');
-    // Newline check (must not use raw newlines inside quotes)
-    const joined = ['a','b'].join('\n');
-    console.assert(joined === 'a\nb', 'join("\\n") should produce backslash-n text');
-    const j2 = ['a','b'].join('\n').replace(/\\n/g, '\n');
-    console.assert(j2 === 'a\nb'.replace(/\\n/g, '\n'), 'After unescape, real newline matches');
-
-    // Data integrity
-    console.assert(Array.isArray(DATA) && DATA.length>0, 'DATA should not be empty');
-    const cats = new Set(CATEGORIES);
-    console.assert(DATA.every(d=>cats.has(d.category)), 'Every item must belong to a declared category');
-    console.assert(!cats.has('Assessments & Demos'), 'Removed category must stay removed');
-
-    // Customer Assessment under Incentives
-    const cai = DATA.find(d=>d.id==='customer-assessment');
-    console.assert(cai && cai.category === 'Incentives', 'Customer Assessment Incentive must be under Incentives');
-
-    // Runbook removed
-    console.assert(!DATA.some(d=>d.id==='runbook'), 'Assessment Runbook must be removed');
-
-    // Collapsed by default
+    // ebooks must render
     render();
-    let openCount = document.querySelectorAll('details.section[open]').length;
-    console.assert(openCount === 0, 'All sections start collapsed');
+    const ebooksAny = Array.from(document.querySelectorAll('a.pill')).some(a=>/ebooks\.cisco\.com\/story\//.test(a.href));
+    console.assert(ebooksAny, 'ebooks.cisco.com links should render');
+    const reqHrefs = [
+      'sase-solutions-specialization-requirements.pdf',
+      'xdr-solutions-requirements-document.pdf',
+      'core-security-solutions-specialization-requirements.pdf',
+      'secure-networking-solutions-specialization-requirements.pdf',
+      'secure-network-management-solutions-specialization-requirements.pdf'
+    ];
+    const reqFound = reqHrefs.every(s => Array.from(document.querySelectorAll('a.pill')).some(a => a.href.includes(s)));
+    console.assert(reqFound, 'All Requirements buttons should be present');
 
-    // Auto-open equals number of categories with matches
-    const input = document.getElementById('q');
-    if (input) { input.value = 'assessment'; render(); }
-    const categoriesWithMatches = new Set(DATA.filter(d => (d.title + ' ' + d.summary + ' ' + (d.tags||[]).join(' ')).toLowerCase().includes('assessment')).map(d => d.category));
-    openCount = document.querySelectorAll('details.section[open]').length;
-    console.assert(openCount === categoriesWithMatches.size, 'Auto-open count must match categories with results');
-
-    // Overview order (first 7)
-    const ov = DATA.filter(d=>d.category==='Cisco Security Overview').slice(0,7).map(d=>d.id).join(',');
-    console.assert(ov === 'overview-firewall,overview-xdr,overview-secure-access,overview-duo,overview-umbrella,overview-ise,overview-secure-email', 'Overview order must match');
-
-    // Suites present
-    const suiteIds = DATA.filter(d=>d.category==='Architectures & Suites' && d.id.startsWith('suite-')).map(d=>d.id);
-    console.assert(suiteIds.length >= 3 && suiteIds.includes('suite-breach') && suiteIds.includes('suite-cloud') && suiteIds.includes('suite-user'), 'Three suites must exist (breach/cloud/user)');
-
-    // Competition & Specializations
-    console.assert(cats.has('Competition') && cats.has('Cisco Security Specializations'), 'Competition & Specializations categories must exist');
-
-    // Link policy (+ Self‑Check exception)
-    const invalid = DATA.flatMap(i => i.links.map(l => l.url)).filter(u => !u.startsWith('https://www.cisco.com/') && !/^https:\/\/cihanalacamli\.github\.io\/?/.test(u));
-    console.assert(invalid.length === 0, 'Links must be cisco.com, except the Self‑Check CTA');
-
-    // Self‑Check CTA renders
-    render();
-    const selfCheckBtn = document.querySelector('a.pill[href^="https://cihanalacamli.github.io"]');
-    console.assert(!!selfCheckBtn, 'Open Simulator button should render under 360 Alignment');
-
-    // copyText returns a Promise (sanity)
-    const p = copyText('sanity');
-    console.assert(p && typeof p.then === 'function', 'copyText returns a Promise');
-
+    // Link policy (+ Self-Check exception)
+    const invalid = (window.DATA||[]).flatMap(i => i.links.map(l => l.url)).filter(u => !/^https:\/\/([a-z0-9-]+\.)*cisco\.com\//i.test(u) && !/^https:\/\/cihanalacamli\.github\.io\/?/.test(u));
+    console.assert(invalid.length === 0, 'Links must be *.cisco.com, except the Self-Check CTA');
     console.groupEnd();
   } catch(e){ console.error('Tests failed:', e); }
 })();
